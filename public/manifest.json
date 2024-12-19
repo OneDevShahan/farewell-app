@@ -3,7 +3,7 @@
   "name": "Farewell Countdown App",
   "icons": [
     {
-      "src": "favicon.svg",
+      "src":"Popper.svg",
       "sizes": "any",
       "type": "image/svg+xml"
     }

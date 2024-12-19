@@ -2,13 +2,16 @@ import React from "react";
 import { BsChat } from "react-icons/bs";
 import { CiBrightnessDown, CiBrightnessUp, CiUser } from "react-icons/ci";
 import { Link } from "react-router-dom"; // Import Link for routing
-
 const Header = ({ darkMode, toggleTheme }) => {
   return (
     <header className="flex items-center justify-between px-4 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 dark:bg-gradient-to-r">
       {/* Left side: Name */}
-      <Link to="/" className="text-white text-2xl p-3 m-2 font-bold flex items-center">
-        Farewell🎉
+      <Link
+        to="/"
+        className="text-white text-2xl p-3 m-2 font-bold flex items-center"
+      >
+        Farewell
+        🎉
       </Link>
 
       {/* Center: Navigation Links */}
