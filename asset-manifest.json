@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/farewell-app/static/css/main.a716f111.css",
+    "main.js": "/farewell-app/static/js/main.94a6c1e6.js",
+    "index.html": "/farewell-app/index.html",
+    "main.a716f111.css.map": "/farewell-app/static/css/main.a716f111.css.map",
+    "main.94a6c1e6.js.map": "/farewell-app/static/js/main.94a6c1e6.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.a716f111.css",
+    "static/js/main.94a6c1e6.js"
+  ]
+}
