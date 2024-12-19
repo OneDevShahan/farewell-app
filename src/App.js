@@ -19,6 +19,10 @@ const App = () => {
             path="/"
             element={<Countdown targetDate="2025-01-13T00:00:00" />}
           />
+          <Route
+            path="/farewell-app"
+            element={<Countdown targetDate="2025-01-13T00:00:00" />}
+          />
           <Route path="/profile" element={<Profile />} />
           <Route path="/wish" element={<MessageBoard />} />
           <Route path="*" element={<NoPage />} />
