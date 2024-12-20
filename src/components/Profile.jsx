@@ -6,42 +6,45 @@ const Profile = () => {
   const images = [
     {
       src: `${process.env.PUBLIC_URL}/images/MM_1stDayAfterCorona.jpg`,
-      alt: "1st Day after Corona",
+      alt: "First Day After Corona",
+    },
+    {
+      src: `${process.env.PUBLIC_URL}/images/TeamLunch.jpg`,
+      alt: "Team Lunch",
     },
     {
       src: `${process.env.PUBLIC_URL}/images/MM_BirthdayCelebration.jpg`,
       alt: "Birthday Celebration",
     },
-    { src: `${process.env.PUBLIC_URL}/images/MM_Card.jpg`, alt: "Fun" },
     {
-      src: `${process.env.PUBLIC_URL}/images/MM_Diwali.jpg`,
-      alt: "Diwali Celebrations",
+      src: `${process.env.PUBLIC_URL}/images/MM_Photography.jpg`,
+      alt: "Photography",
     },
     {
       src: `${process.env.PUBLIC_URL}/images/MM_Flipside.jpg`,
       alt: "Team Outing",
-    },
-    {
-      src: `${process.env.PUBLIC_URL}/images/MM_Flipside.jpg`,
-      alt: "Team Outing",
-    },
-    {
-      src: `${process.env.PUBLIC_URL}/images/MM_LeadershipVisit.jpg`,
-      alt: "Leadership Visit",
-    },
-    { src: `${process.env.PUBLIC_URL}/images/MM_Lunch.jpg`, alt: "Team Lunch" },
-    { src: `${process.env.PUBLIC_URL}/images/MM_TedX.jpg`, alt: "TedEx" },
-    {
-      src: `${process.env.PUBLIC_URL}/images/MM_Travel.jpg`,
-      alt: "Team Travel",
     },
     {
       src: `${process.env.PUBLIC_URL}/images/MM_Sameer_Marriage.jpg`,
       alt: "Sameer's Marriage",
     },
     {
-      src: `${process.env.PUBLIC_URL}/images/TeamLunch.jpg`,
-      alt: "Team Lunch",
+      src: `${process.env.PUBLIC_URL}/images/MM_LeadershipVisit.jpg`,
+      alt: "Leadership Visit",
+    },
+    {
+      src: `${process.env.PUBLIC_URL}/images/MM_OG.jpg`,
+      alt: "Real OGs",
+    },
+    { src: `${process.env.PUBLIC_URL}/images/MM_TedX.jpg`, alt: "TedEx" },
+    {
+      src: `${process.env.PUBLIC_URL}/images/MM_Travel.jpg`,
+      alt: "Team Travel",
+    },
+    { src: `${process.env.PUBLIC_URL}/images/MM_Card.jpg`, alt: "Some Night" },
+    {
+      src: `${process.env.PUBLIC_URL}/images/MM_Diwali.jpg`,
+      alt: "Diwali Celebrations",
     },
   ];
 
@@ -63,13 +66,15 @@ const Profile = () => {
       <h2 className="text-2xl font-semibold mt-8">Cherished Memories</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
         {images.map((image, index) => (
-          <img
-            key={index}
-            src={image.src}
-            alt={image.alt}
-            className="w-full h-64 object-cover rounded-lg transform hover:scale-105 transition-transform duration-300 cursor-pointer"
-            onClick={() => setSelectedImage(image.src)}
-          />
+          <div key={index} className="flex flex-col items-center">
+            <img
+              src={image.src}
+              alt={image.alt}
+              className="w-full h-64 object-cover rounded-lg transform hover:scale-105 transition-transform duration-300 cursor-pointer"
+              onClick={() => setSelectedImage(image.src)}
+            />
+            <p className="text-center text-sm font-medium mt-2">{image.alt}</p>
+          </div>
         ))}
       </div>
 
