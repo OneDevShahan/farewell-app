@@ -1,39 +1,44 @@
 import React, { useState, useEffect } from "react";
-import { FiMessageCircle } from "react-icons/fi"; // Import icons
+import { FiMessageCircle } from "react-icons/fi";
+import { collection, addDoc, onSnapshot } from "firebase/firestore";
+import { db } from "../firebase"; // Ensure you have a properly configured Firestore instance
 
 const MessageBoard = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [name, setName] = useState("");
-  const [cardColor, setCardColor] = useState("#6b46c1"); // Default card background color
+  const [cardColor, setCardColor] = useState("#6b46c1");
 
-  // Load messages from localStorage on initial load
+  // Fetch messages from Firestore on component mount
   useEffect(() => {
-    const savedMessages = localStorage.getItem("messages");
-    if (savedMessages) {
-      setMessages(JSON.parse(savedMessages));
-    }
+    const unsubscribe = onSnapshot(
+      collection(db, "messages"),
+      (snapshot) => {
+        const loadedMessages = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setMessages(loadedMessages);
+      }
+    );
+
+    return () => unsubscribe(); // Cleanup the listener on unmount
   }, []);
 
-  // Save messages to localStorage whenever they change
-  useEffect(() => {
-    if (messages.length > 0) {
-      localStorage.setItem("messages", JSON.stringify(messages));
-    }
-  }, [messages]);
-
-  const addMessage = () => {
+  const addMessage = async () => {
     if (newMessage.trim()) {
-      const newMsg = {
-        name: name.trim(),
-        text: newMessage.trim(),
-        color: cardColor,
-      };
-      const updatedMessages = [...messages, newMsg];
-      setMessages(updatedMessages); // Update state
-      setNewMessage(""); // Clear the message input
-      setName(""); // Clear the name input
-      setCardColor("#6b46c1"); // Reset to default color
+      try {
+        await addDoc(collection(db, "messages"), {
+          name: name.trim(),
+          text: newMessage.trim(),
+          color: cardColor,
+        });
+        setNewMessage("");
+        setName("");
+        setCardColor("#6b46c1");
+      } catch (error) {
+        console.error("Error adding message: ", error);
+      }
     }
   };
 
@@ -92,9 +97,9 @@ const MessageBoard = () => {
           </p>
         ) : (
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {messages.map((msg, index) => (
+            {messages.map((msg) => (
               <div
-                key={index}
+                key={msg.id}
                 className="p-4 rounded-lg shadow-md hover:shadow-xl transition-transform transform hover:scale-105 duration-500 text-white break-words overflow-hidden"
                 style={{
                   backgroundColor: msg.color,
@@ -102,7 +107,6 @@ const MessageBoard = () => {
                   overflowWrap: "break-word",
                 }}
               >
-                {/* Show name if provided */}
                 {msg.name && (
                   <p className="text-sm font-semibold text-yellow-300 mb-2 text-center">
                     {msg.name}
