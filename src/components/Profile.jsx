@@ -1,24 +1,91 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Profile = () => {
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const images = [
+    {
+      src: `${process.env.PUBLIC_URL}/images/MM_1stDayAfterCorona.jpg`,
+      alt: "1st Day after Corona",
+    },
+    {
+      src: `${process.env.PUBLIC_URL}/images/MM_BirthdayCelebration.jpg`,
+      alt: "Birthday Celebration",
+    },
+    { src: `${process.env.PUBLIC_URL}/images/MM_Card.jpg`, alt: "Fun" },
+    {
+      src: `${process.env.PUBLIC_URL}/images/MM_Diwali.jpg`,
+      alt: "Diwali Celebrations",
+    },
+    {
+      src: `${process.env.PUBLIC_URL}/images/MM_Flipside.jpg`,
+      alt: "Team Outing",
+    },
+    {
+      src: `${process.env.PUBLIC_URL}/images/MM_Flipside.jpg`,
+      alt: "Team Outing",
+    },
+    {
+      src: `${process.env.PUBLIC_URL}/images/MM_LeadershipVisit.jpg`,
+      alt: "Leadership Visit",
+    },
+    { src: `${process.env.PUBLIC_URL}/images/MM_Lunch.jpg`, alt: "Team Lunch" },
+    { src: `${process.env.PUBLIC_URL}/images/MM_TedX.jpg`, alt: "TedEx" },
+    {
+      src: `${process.env.PUBLIC_URL}/images/MM_Travel.jpg`,
+      alt: "Team Travel",
+    },
+    {
+      src: `${process.env.PUBLIC_URL}/images/MM_Sameer_Marriage.jpg`,
+      alt: "Sameer's Marriage",
+    },
+    {
+      src: `${process.env.PUBLIC_URL}/images/TeamLunch.jpg`,
+      alt: "Team Lunch",
+    },
+  ];
+
   return (
     <div className="flex flex-col items-center p-6 bg-gray-100 dark:bg-gray-800 text-black dark:text-white min-h-screen">
       <h1 className="text-3xl md:text-4xl font-bold mb-4">Shahan Ahmad</h1>
       <img
-        src="https://via.placeholder.com/150"
+        src={`${process.env.PUBLIC_URL}/images/Rohtang.jpg`}
         alt="Profile"
-        className="w-32 h-32 rounded-full mb-4"
+        className="w-32 h-32 object-cover rounded-full mb-4"
       />
       <p className="text-center">
-        Hi, I'm <strong>Shahan Ahmad</strong>! It's been an incredible journey
-        here. I'm leaving on <strong>13th Jan 2025</strong>, but this is not a
-        goodbye!
+        Hi, I'm <strong>Shahan Ahmad</strong>. My journey at MM has been a blend
+        of challenges, learning, and incredible memories. I'm grateful for all
+        the friendships and unforgettable moments. Although I'm leaving on{" "}
+        <strong>13th Jan 2025</strong>, MM will always hold a special place in
+        my heart.
       </p>
-      <ul className="mt-6 list-disc text-left mx-auto max-w-lg">
-        <li>Started as a Software Engineer in 2018.</li>
-        <li>Promoted to Associate in 2021.</li>
-        <li>Contributed to [Notable Projects].</li>
-      </ul>
+      <h2 className="text-2xl font-semibold mt-8">Cherished Memories</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+        {images.map((image, index) => (
+          <img
+            key={index}
+            src={image.src}
+            alt={image.alt}
+            className="w-full h-64 object-cover rounded-lg transform hover:scale-105 transition-transform duration-300 cursor-pointer"
+            onClick={() => setSelectedImage(image.src)}
+          />
+        ))}
+      </div>
+
+      {/* Modal for Full-Screen View */}
+      {selectedImage && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
+          onClick={() => setSelectedImage(null)}
+        >
+          <img
+            src={selectedImage}
+            alt="Full-Screen View"
+            className="max-w-full max-h-full object-contain"
+          />
+        </div>
+      )}
     </div>
   );
 };
