@@ -36,7 +36,7 @@ const Profile = () => {
       src: `${process.env.PUBLIC_URL}/images/MM_OG.jpg`,
       alt: "Real OGs",
     },
-    { src: `${process.env.PUBLIC_URL}/images/MM_TedX.jpg`, alt: "TedEx" },
+    { src: `${process.env.PUBLIC_URL}/images/MM_TedX.jpg`, alt: "TEDx" },
     {
       src: `${process.env.PUBLIC_URL}/images/MM_Travel.jpg`,
       alt: "Team Travel",
