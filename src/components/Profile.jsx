@@ -17,8 +17,8 @@ const Profile = () => {
       alt: "Birthday Celebration",
     },
     {
-      src: `${process.env.PUBLIC_URL}/images/MM_Photography.jpg`,
-      alt: "Photography",
+      src: `${process.env.PUBLIC_URL}/images/MM_Photo.jpg`,
+      alt: "Photo",
     },
     {
       src: `${process.env.PUBLIC_URL}/images/MM_Flipside.jpg`,
