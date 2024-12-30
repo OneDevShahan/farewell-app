@@ -42,7 +42,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-gray-100 dark:bg-gray-800 text-black dark:text-gray-100 py-6 mt-20">
+    <footer className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-100 py-6 mt-20">
       <div className="container mx-auto text-center">
         <div className="flex justify-center space-x-4">
           {socialLinks.map((link) => (
