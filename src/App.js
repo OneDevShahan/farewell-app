@@ -6,6 +6,8 @@ import MessageBoard from "./components/MessageBoard";
 import Countdown from "./components/Countdown";
 import { useTheme } from "./components/ThemeProvider";
 import NoPage from "./components/NoPage";
+import Footer from "./components/Footer";
+import Contact from "./components/Contact";
 
 const App = () => {
   const { darkMode, toggleTheme } = useTheme();
@@ -25,9 +27,11 @@ const App = () => {
           />
           <Route path="/profile" element={<Profile />} />
           <Route path="/wish" element={<MessageBoard />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NoPage />} />
         </Routes>
       </div>
+        <Footer />
     </Router>
   );
 };

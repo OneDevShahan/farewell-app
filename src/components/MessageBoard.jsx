@@ -45,7 +45,7 @@ const MessageBoard = () => {
   return (
     <div className="min-h-screen flex bg-gradient-to-r from-blue-600 to-teal-500 text-white">
       {/* Left: Message Input */}
-      <div className="w-2/5 p-6 bg-white text-gray-900 dark:bg-gray-700 dark:text-gray-100 flex flex-col">
+      <div className="w-2/5 p-6 bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-gray-100 flex flex-col">
         <h2 className="text-2xl font-bold mb-4 text-center">
           Leave a Farewell Message
         </h2>
@@ -87,7 +87,7 @@ const MessageBoard = () => {
       </div>
 
       {/* Right: Messages Display */}
-      <div className="w-3/5 max-h-screen overflow-y-auto bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 p-6">
+      <div className="w-3/5 max-h-screen overflow-y-auto bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 p-6">
         <h3 className="text-xl font-semibold mb-4">
           Bag of wishes - {messages.length}
         </h3>
