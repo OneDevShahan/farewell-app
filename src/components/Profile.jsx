@@ -21,7 +21,7 @@ const Profile = () => {
       alt: "Photo",
     },
     {
-      src: `${process.env.PUBLIC_URL}/images/MM_Flipside.jpg`,
+      src: `${process.env.PUBLIC_URL}/images/MM_Flip.jpg`,
       alt: "Team Outing",
     },
     {

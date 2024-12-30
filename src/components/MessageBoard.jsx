@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { FiMessageCircle } from "react-icons/fi";
-import { collection, addDoc, onSnapshot } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  onSnapshot,
+  serverTimestamp,
+} from "firebase/firestore";
 import { db } from "../firebase"; // Ensure you have a properly configured Firestore instance
+import { HiOutlineChatBubbleOvalLeft } from "react-icons/hi2";
 
 const MessageBoard = () => {
   const [messages, setMessages] = useState([]);
@@ -11,16 +16,13 @@ const MessageBoard = () => {
 
   // Fetch messages from Firestore on component mount
   useEffect(() => {
-    const unsubscribe = onSnapshot(
-      collection(db, "messages"),
-      (snapshot) => {
-        const loadedMessages = snapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setMessages(loadedMessages);
-      }
-    );
+    const unsubscribe = onSnapshot(collection(db, "messages"), (snapshot) => {
+      const loadedMessages = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setMessages(loadedMessages);
+    });
 
     return () => unsubscribe(); // Cleanup the listener on unmount
   }, []);
@@ -32,6 +34,7 @@ const MessageBoard = () => {
           name: name.trim(),
           text: newMessage.trim(),
           color: cardColor,
+          timestamp: serverTimestamp(), // Add the timestamp here
         });
         setNewMessage("");
         setName("");
@@ -42,10 +45,29 @@ const MessageBoard = () => {
     }
   };
 
+  const getContrastColor = (hexColor) => {
+    // Convert hex to RGB
+    const r = parseInt(hexColor.substring(1, 3), 16);
+    const g = parseInt(hexColor.substring(3, 5), 16);
+    const b = parseInt(hexColor.substring(5, 7), 16);
+
+    // Calculate luminance
+    const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+
+    // Return black for light colors and white for dark colors
+    return luminance > 0.5 ? "#000000" : "#FFFFFF";
+  };
+
+  const formatTimestamp = (timestamp) => {
+    if (!timestamp) return "Just now";
+    const date = timestamp.toDate();
+    return `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+  };
+
   return (
     <div className="min-h-screen flex bg-gradient-to-r from-blue-600 to-teal-500 text-white">
       {/* Left: Message Input */}
-      <div className="w-2/5 p-6 bg-white text-gray-900 dark:bg-gray-700 dark:text-gray-100 flex flex-col">
+      <div className="w-2/5 py-16 px-8 bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-gray-100 flex flex-col">
         <h2 className="text-2xl font-bold mb-4 text-center">
           Leave a Farewell Message
         </h2>
@@ -82,13 +104,14 @@ const MessageBoard = () => {
           onClick={addMessage}
           disabled={!newMessage.trim()}
         >
-          <FiMessageCircle className="inline mr-2 text-xl" /> Add Message
+          <HiOutlineChatBubbleOvalLeft className="inline mr-2 text-xl" /> Add
+          Message
         </button>
       </div>
 
       {/* Right: Messages Display */}
-      <div className="w-3/5 max-h-screen overflow-y-auto bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 p-6">
-        <h3 className="text-xl font-semibold mb-4">
+      <div className="w-3/5 py-16 px-8 max-h-screen overflow-y-auto bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 p-6">
+        <h3 className="text-xl font-semibold mb-6">
           Bag of wishes - {messages.length}
         </h3>
         {messages.length === 0 ? (
@@ -96,7 +119,7 @@ const MessageBoard = () => {
             No messages yet. Be the first to leave one!
           </p>
         ) : (
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {messages.map((msg) => (
               <div
                 key={msg.id}
@@ -108,11 +131,24 @@ const MessageBoard = () => {
                 }}
               >
                 {msg.name && (
-                  <p className="text-sm font-semibold text-yellow-300 mb-2 text-center">
+                  <p
+                    className="text-sm font-semibold mb-2 text-center"
+                    style={{
+                      color: getContrastColor(msg.color),
+                    }}
+                  >
                     {msg.name}
                   </p>
                 )}
                 <p className="text-lg font-medium text-center">{msg.text}</p>
+                <p
+                  className="text-xs text-center mt-2"
+                  style={{
+                    color: getContrastColor(msg.color),
+                  }}
+                >
+                  {formatTimestamp(msg.timestamp)}
+                </p>
               </div>
             ))}
           </div>

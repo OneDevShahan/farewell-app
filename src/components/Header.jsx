@@ -1,7 +1,10 @@
 import React from "react";
-import { BsChat } from "react-icons/bs";
-import { CiBrightnessDown, CiBrightnessUp, CiUser } from "react-icons/ci";
-import { Link } from "react-router-dom"; // Import Link for routing
+import { BiUser } from "react-icons/bi";
+import { CiBrightnessDown, CiBrightnessUp } from "react-icons/ci";
+import { HiOutlineChatBubbleOvalLeft } from "react-icons/hi2";
+import { IoCallOutline } from "react-icons/io5";
+import { Link } from "react-router-dom";
+
 const Header = ({ darkMode, toggleTheme }) => {
   return (
     <header className="flex items-center justify-between px-4 bg-gradient-to-r from-blue-500 via-purple-600 to-pink-500 dark:bg-gradient-to-r">
@@ -10,8 +13,7 @@ const Header = ({ darkMode, toggleTheme }) => {
         to="/"
         className="text-white text-2xl p-3 m-2 font-bold flex items-center"
       >
-        Farewell
-        🎉
+        Farewell 🎉
       </Link>
 
       {/* Center: Navigation Links */}
@@ -21,14 +23,21 @@ const Header = ({ darkMode, toggleTheme }) => {
           className="flex items-center justify-center hover:text-gray-300 transition-colors"
           title="Wish Me Luck"
         >
-          <BsChat size={24} />
+          <HiOutlineChatBubbleOvalLeft size={24} />
         </Link>
         <Link
           to="/profile"
           className="flex items-center justify-center hover:text-gray-300 transition-colors"
           title="Profile"
         >
-          <CiUser size={24} />
+          <BiUser size={24} />
+        </Link>
+        <Link
+          to="/contact"
+          className="flex items-center justify-center hover:text-gray-300 transition-colors"
+          title="Contact Me"
+        >
+          <IoCallOutline size={24} />
         </Link>
       </div>
 
