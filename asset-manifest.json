@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/farewell-app/static/css/main.6ec0ff6a.css",
-    "main.js": "/farewell-app/static/js/main.78bb6343.js",
+    "main.css": "/farewell-app/static/css/main.b2e9de86.css",
+    "main.js": "/farewell-app/static/js/main.5bd6a188.js",
     "index.html": "/farewell-app/index.html",
-    "main.6ec0ff6a.css.map": "/farewell-app/static/css/main.6ec0ff6a.css.map",
-    "main.78bb6343.js.map": "/farewell-app/static/js/main.78bb6343.js.map"
+    "main.b2e9de86.css.map": "/farewell-app/static/css/main.b2e9de86.css.map",
+    "main.5bd6a188.js.map": "/farewell-app/static/js/main.5bd6a188.js.map"
   },
   "entrypoints": [
-    "static/css/main.6ec0ff6a.css",
-    "static/js/main.78bb6343.js"
+    "static/css/main.b2e9de86.css",
+    "static/js/main.5bd6a188.js"
   ]
 }
